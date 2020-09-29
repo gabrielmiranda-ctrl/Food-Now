@@ -1,11 +1,11 @@
-import  React, { Component } from 'react';
-import { View, StyleSheet} from 'react-native';
-import Home from './src/screens/Home';
+import * as React from 'react';
+import { View, StyleSheet,} from 'react-native';
+import Descriptions from './src/screens/Descriptions';
 
 export default function App() {
     return (
             <View style={styles.container}>
-                <Home/>
+                <Descriptions/>
             </View>
     );
 }
@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     height: '100%',
+    padding: 5,
     flexDirection: 'row',
     flexWrap: 'wrap',
   },

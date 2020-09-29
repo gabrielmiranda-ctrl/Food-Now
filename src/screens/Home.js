@@ -13,63 +13,12 @@ import Bag from './Bag';
 //setando tamanho
 const {width } = Dimensions.get("window");
 const height = width * 0.6; //60%
- 
-{/* imagens
-  
-    const images = [
-    'https://images.pexels.com/photos/3821692/pexels-photo-3821692.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-    'https://images.pexels.com/photos/769289/pexels-photo-769289.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-    'https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-  ]
-*/}
+
 class Home extends Component {
-
-  //state = { //active dots
-  //  active: 0
-  //}
-
-  //change = ({nativeEvent}) => {
-  //  const slide = Math.ceil(nativeEvent.contentOffset.x / nativeEvent.layoutMeasurement.width);
-  //  if(slide !==this.state.active){
-  //    this.setState({active: slide});
-  //  }
-  //}
-
  render(){
-    return(
-      
-      //slide
+    return(   
       <View style={style.container}>
-        <ScrollView>
-       {/* //slide da home
-       
-       
-       <ScrollView 
-        paginEnabled 
-        horizontal 
-        onScroll={this.change}
-        showsHorizontalScrollIndicator={false}
-        style={style.scroll}>
-          {
-            images.map((image, index)=> (
-              <Image
-                key={index}
-                source={{uri: image}}
-                style={style.image}>
-              </Image>
-            ))
-          }
-        </ScrollView>
-
-        <View style={style.pagination}>
-          {
-            // dots slide
-            images.map((i,k) =>(
-              <Text key={k}style={k==this.state.active ? style.pagingActiveText : style.pagingText}>⬤</Text>
-            ))
-          }
-        </View> */}
-        
+        <ScrollView>        
         <View style={style.name}>
           <Text style={style.nameUser}>
             Olá, Sandro
@@ -289,7 +238,6 @@ const style = StyleSheet.create({
     fontSize: (width / 30),
     color: '#888',
     margin: 3,
-
   },
   pagingActiveText: {
     fontSize: (width / 30),

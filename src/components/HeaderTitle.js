@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, StatusBar} from 'react-native';
+import { Text, View, StyleSheet} from 'react-native';
 
 export default function HeaderTitle() {
   return(
     <View style={styles.header}>
-      <StatusBar backgroundColor="#f5872b"/>
+      
       <Text style={styles.title}>Promoções</Text>
       <View style={styles.search}>
       </View>
