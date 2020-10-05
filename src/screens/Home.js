@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, ScrollView, StyleSheet,Text, Dimensions } from 'react-native';
+import { View, Image, ScrollView, StyleSheet, Text, Dimensions } from 'react-native';
 //import Bottom Navigation
 import { createAppContainer } from 'react-navigation';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
@@ -11,126 +11,126 @@ import Profile from './Profile';
 import MenuOptions from './MenuOptions';
 import Bag from './Bag';
 //setando tamanho
-const {width } = Dimensions.get("window");
+const { width } = Dimensions.get("window");
 const height = width * 0.6; //60%
 
 class Home extends Component {
- render(){
-    return(   
+  render() {
+    return (
       <View style={style.container}>
-        <ScrollView>        
-        <View style={style.name}>
-          <Text style={style.nameUser}>
-            Olá, Sandro
+        <ScrollView>
+          <View style={style.name}>
+            <Text style={style.nameUser}>
+              Olá, Sandro
           </Text>
-          <Text style={style.questUser}>
-            O que você quer comer?
+            <Text style={style.questUser}>
+              O que você quer comer?
           </Text>
-        </View>
-        <View style={style.contact}>
-                  <View style={style.circle}>
-                      <View style={style.inner}>
-                        <View style={style.circleIcon}>
-                          <Icon name={'map-marker'} size={35} style={style.icon} />
-                        </View>
-                      </View>
-                  </View>
-               
-                  <View style={style.circle}>
-                      <View style={style.inner}>
-                      <View style={style.circleIcon}>
-                          <Icon name={'envelope'} size={35} style={style.icon} />
-                        </View>
-                      </View>
-                  </View>
-  
-                  <View style={style.circle}>   
-                      <View style={style.inner}>
-                      <View style={style.circleIcon}>
-                          <Icon name={'phone'} size={35} style={style.icon} />
-                        </View>
-                      </View>
-                  </View>
-
-                  <View style={style.circle}>   
-                      <View style={style.inner}>
-                      <View style={style.circleIcon}>
-                          <Icon name={'comment'} size={35} style={style.icon} />
-                        </View>
-                      </View>
-                  </View>
+          </View>
+          <View style={style.contact}>
+            <View style={style.circle}>
+              <View style={style.inner}>
+                <View style={style.circleIcon}>
+                  <Icon name={'map-marker'} size={35} style={style.icon} />
+                </View>
               </View>
+            </View>
 
-        <View style={style.boxTitle}>
-          <HeaderTitle/>
-        </View>
-
-        <View stytle={{height: 130, marginTop: 20, paddingLeft: 15, paddingRight: 15}}>
-        <ScrollView paginEnabled horizontal onScroll={this.change} showsHorizontalScrollIndicator={false} style={style.scroll}>
-            
-            <View style={style.boxProducts}>
-              <View style={{flex: 2}}>
-                <Image 
-                  source={require('../../assets/Menu/ExecutivoCoxa.jpg')}
-                  style = {style.ImageProducts}>
-                </Image>
+            <View style={style.circle}>
+              <View style={style.inner}>
+                <View style={style.circleIcon}>
+                  <Icon name={'envelope'} size={35} style={style.icon} />
+                </View>
               </View>
-              <View style={style.TextProducts}>
+            </View>
+
+            <View style={style.circle}>
+              <View style={style.inner}>
+                <View style={style.circleIcon}>
+                  <Icon name={'phone'} size={35} style={style.icon} />
+                </View>
+              </View>
+            </View>
+
+            <View style={style.circle}>
+              <View style={style.inner}>
+                <View style={style.circleIcon}>
+                  <Icon name={'comment'} size={35} style={style.icon} />
+                </View>
+              </View>
+            </View>
+          </View>
+
+          <View style={style.boxTitle}>
+            <HeaderTitle />
+          </View>
+
+          <View stytle={{ height: 130, marginTop: 20, paddingLeft: 15, paddingRight: 15 }}>
+            <ScrollView paginEnabled horizontal onScroll={this.change} showsHorizontalScrollIndicator={false} style={style.scroll}>
+
+              <View style={style.boxProducts}>
+                <View style={{ flex: 2 }}>
+                  <Image
+                    source={require('../../assets/Menu/ExecutivoCoxa.jpg')}
+                    style={style.ImageProducts}>
+                  </Image>
+                </View>
+                <View style={style.TextProducts}>
                   <Text style={style.NameProducts}>Executivo Coxa</Text>
                   <Text style={style.descriptionMenu}>Arroz, fritas, feijão, alface, cenoura, tomate, coxa de frango grelhada</Text>
                   <Text style={style.valueMenu}>R$ 25,00</Text>
                   <Text style={style.valueMenuValid}>R$ 20,00</Text>
+                </View>
               </View>
-            </View>
-            
-            <View style={style.boxProducts}>
-              <View style={{flex: 2}}>
-                <Image 
-                  source={require('../../assets/Menu/MousseMaracuja.jpg')}
-                  style = {style.ImageProducts}>
-                </Image>
-              </View>
-              <View style={style.TextProducts}>
-              <Text style={style.NameProducts}>Mousse de Maracujá</Text>
+
+              <View style={style.boxProducts}>
+                <View style={{ flex: 2 }}>
+                  <Image
+                    source={require('../../assets/Menu/MousseMaracuja.jpg')}
+                    style={style.ImageProducts}>
+                  </Image>
+                </View>
+                <View style={style.TextProducts}>
+                  <Text style={style.NameProducts}>Mousse de Maracujá</Text>
                   <Text style={style.descriptionMenu}>Mousse de Maracujá com cobertura de chocolate</Text>
                   <Text style={style.valueMenu}>R$ 8,50</Text>
                   <Text style={style.valueMenuValid}>R$ 5,50</Text>
+                </View>
               </View>
-            </View>
 
-            <View style={style.boxProducts}>
-              <View style={{flex: 2}}>
-                <Image 
-                  source={require('../../assets/Menu/CaipirinhaMorango.jpg')}
-                  style = {style.ImageProducts}>
-                </Image>
-              </View>
-              <View style={style.TextProducts}>
-              <Text style={style.NameProducts}>Caipirinha de Morango</Text>
+              <View style={style.boxProducts}>
+                <View style={{ flex: 2 }}>
+                  <Image
+                    source={require('../../assets/Menu/CaipirinhaMorango.jpg')}
+                    style={style.ImageProducts}>
+                  </Image>
+                </View>
+                <View style={style.TextProducts}>
+                  <Text style={style.NameProducts}>Caipirinha de Morango</Text>
                   <Text style={style.descriptionMenu}>Caipinha de Morango de Vodka Orloff</Text>
                   <Text style={style.valueMenu}>R$ 13,50</Text>
                   <Text style={style.valueMenuValid}>R$ 10,50</Text>
+                </View>
               </View>
-            </View>
-            
-            <View style={style.boxProducts}>
-              <View style={{flex: 2}}>
-                <Image 
-                  source={require('../../assets/Menu/SaladaFrutas.jpg')}
-                  style = {style.ImageProducts}>
-                </Image>
-              </View>
-              <View style={style.TextProducts}>
-              <Text style={style.NameProducts}>Salada de Frutas</Text>
+
+              <View style={style.boxProducts}>
+                <View style={{ flex: 2 }}>
+                  <Image
+                    source={require('../../assets/Menu/SaladaFrutas.jpg')}
+                    style={style.ImageProducts}>
+                  </Image>
+                </View>
+                <View style={style.TextProducts}>
+                  <Text style={style.NameProducts}>Salada de Frutas</Text>
                   <Text style={style.descriptionMenu}>Morango, Laranja, Abacaxi, Manga, Kiwi, Amora</Text>
                   <Text style={style.valueMenu}>R$ 18,50</Text>
                   <Text style={style.valueMenuValid}>R$ 15,00</Text>
+                </View>
               </View>
-            </View>
 
-          </ScrollView>
-        </View>
-      </ScrollView>
+            </ScrollView>
+          </View>
+        </ScrollView>
       </View>
     );
   }
@@ -139,61 +139,61 @@ class Home extends Component {
 //menu navigation
 const TabNavigator = createMaterialBottomTabNavigator(
   {
-    Home:{
+    Home: {
       screen: Home,
       navigationOptions: {
         tabBarLabel: 'Home',
         activeColor: '#fff',
         inactiveColor: '#fff',
-        barStyle: { backgroundColor: '#f5872b'},
-        tabBarIcon:()=>(
+        barStyle: { backgroundColor: '#f5872b' },
+        tabBarIcon: () => (
           <View>
-            <Icon name={'home'} size={27} style={{color: '#fff'}} />
+            <Icon name={'home'} size={27} style={{ color: '#fff' }} />
           </View>
         )
       }
     },
 
-    MenuOptions:{
+    MenuOptions: {
       screen: MenuOptions,
       navigationOptions: {
         tabBarLabel: 'Menu',
         activeColor: '#fff',
         inactiveColor: '#000000',
-        barStyle: { backgroundColor: '#f5872b'},
-        tabBarIcon:()=>(
+        barStyle: { backgroundColor: '#f5872b' },
+        tabBarIcon: () => (
           <View>
-            <Icon name={'th-large'} size={27} style={{color: '#fff'}} />
+            <Icon name={'th-large'} size={27} style={{ color: '#fff' }} />
           </View>
         )
       }
     },
 
-    Bag:{
+    Bag: {
       screen: Bag,
       navigationOptions: {
         tabBarLabel: 'Carrinho',
         activeColor: '#fff',
         inactiveColor: '#000000',
-        barStyle: { backgroundColor: '#f5872b'},
-        tabBarIcon:()=>(
+        barStyle: { backgroundColor: '#f5872b' },
+        tabBarIcon: () => (
           <View>
-            <Icon name={'shopping-cart'} size={27} style={{color: '#fff'}} />
+            <Icon name={'shopping-cart'} size={27} style={{ color: '#fff' }} />
           </View>
         )
       }
     },
 
-    Profile:{
+    Profile: {
       screen: Profile,
       navigationOptions: {
         tabBarLabel: 'Perfil',
         activeColor: '#fff',
         inactiveColor: '#000000',
-        barStyle: { backgroundColor: '#f5872b'},
-        tabBarIcon:()=>(
+        barStyle: { backgroundColor: '#f5872b' },
+        tabBarIcon: () => (
           <View>
-            <Icon name={'user'} size={27} style={{color: '#fff'}} />
+            <Icon name={'user'} size={27} style={{ color: '#fff' }} />
           </View>
         )
       }
@@ -203,7 +203,7 @@ const TabNavigator = createMaterialBottomTabNavigator(
 
 const style = StyleSheet.create({
   container: {
-    width, 
+    width,
   },
 
   // Bem vindo User
@@ -225,13 +225,13 @@ const style = StyleSheet.create({
   },
   image: {
     width,
-    height: 250, 
+    height: 250,
     resizeMode: 'cover'
   },
   pagination: {
     marginTop: -20,
-    flexDirection:'row',  
-    bottom: 0, 
+    flexDirection: 'row',
+    bottom: 0,
     alignSelf: 'center'
   },
   pagingText: {
@@ -247,12 +247,12 @@ const style = StyleSheet.create({
 
   //Products
   boxProducts: {
-    height: 350, 
-    width: 250, 
-    marginLeft: 5, 
+    height: 350,
+    width: 250,
+    marginLeft: 5,
     marginRight: 5,
-    marginBottom: 15, 
-    borderWidth: 0.5, 
+    marginBottom: 15,
+    borderWidth: 0.5,
     borderRadius: 8,
     backgroundColor: '#eee',
     borderColor: '#dddddd'
@@ -266,18 +266,18 @@ const style = StyleSheet.create({
   },
   TextProducts: {
     marginTop: -35,
-    flex: 1, 
-    paddingLeft: 10, 
+    flex: 1,
+    paddingLeft: 10,
   },
   NameProducts: {
-    paddingLeft: 10, 
+    paddingLeft: 10,
     fontWeight: 'bold',
     color: '#f5872b',
     fontSize: 22,
   },
   descriptionMenu: {
     paddingLeft: 10,
-    paddingTop: 10, 
+    paddingTop: 10,
     height: 45,
     textAlign: 'justify',
     width: '90%',
@@ -285,7 +285,7 @@ const style = StyleSheet.create({
   },
   valueMenu: {
     paddingTop: 10,
-    paddingLeft: 10, 
+    paddingLeft: 10,
     textDecorationLine: 'line-through',
     color: '#d2d2d2',
   },
@@ -293,7 +293,7 @@ const style = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 15,
     paddingTop: 2,
-    paddingLeft: 10, 
+    paddingLeft: 10,
     color: '#f5872b',
   },
 

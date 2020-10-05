@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, StatusBar} from 'react-native';
+import { View, StyleSheet, StatusBar } from 'react-native';
 import Header from '../components/Header';
 import Products from '../components/Products';
 
 
 export default class MenuOptions extends Component {
-  render(){
+  render() {
     return (
-          <View>
-            <StatusBar backgroundColor="#f5872b"/>
-            <Header/>
-            <Products/>
-        </View>
+      <View>
+        <StatusBar backgroundColor="#f5872b" />
+        <Header />
+        <Products />
+      </View>
     );
-  }   
+  }
 }
 
 const styles = StyleSheet.create({

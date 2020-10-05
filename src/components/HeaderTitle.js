@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Text, View, StyleSheet} from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 
 export default function HeaderTitle() {
-  return(
+  return (
     <View style={styles.header}>
-      
+
       <Text style={styles.title}>Promoções</Text>
       <View style={styles.search}>
       </View>

@@ -1,42 +1,42 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, Image, } from 'react-native';
 
-export default function Products(){ 
-    return (
-              <View style={styles.container}>
-                  <View style={styles.box}>
-                      <View style={styles.inner}>
-                        <Image source={require('../../assets/Menu/CategoriaPratos.jpg')} style={styles.imgMenu}/>
-                        <Text style={styles.descriptionMenu}>Pratos</Text>
-                        <Text style={styles.numberMenu}>(23)</Text>
-                      </View>
-                  </View>
-               
-                  <View style={styles.box}>
-                      <View style={styles.inner}>
-                        <Image source={require('../../assets/Menu/CategoriaSobremesa.jpg')} style={styles.imgMenu}/>
-                        <Text style={styles.descriptionMenu}>Sobremesas</Text>
-                        <Text style={styles.numberMenu}>(17)</Text>
-                      </View>
-                  </View>
-  
-                  <View style={styles.box}>   
-                      <View style={styles.inner}>
-                        <Image source={require('../../assets/Menu/CategoriaBebidas.jpg')} style={styles.imgMenu}/>
-                        <Text style={styles.descriptionMenu}>Bebidas</Text>
-                        <Text style={styles.numberMenu}>(21)</Text>
-                      </View>
-                  </View>
-  
-                  <View style={styles.box}>
-                      <View style={styles.inner}>
-                        <Image source={require('../../assets/Menu/CategoriaPorcoes.jpg')} style={styles.imgMenu}/>
-                        <Text style={styles.descriptionMenu}>Porções</Text>
-                        <Text style={styles.numberMenu}>(14)</Text>
-                      </View>
-                  </View>    
-              </View>                       
-      );
+export default function Products() {
+  return (
+    <View style={styles.container}>
+      <View style={styles.box}>
+        <View style={styles.inner}>
+          <Image source={require('../../assets/Menu/CategoriaPratos.jpg')} style={styles.imgMenu} />
+          <Text style={styles.descriptionMenu}>Pratos</Text>
+          <Text style={styles.numberMenu}>(23)</Text>
+        </View>
+      </View>
+
+      <View style={styles.box}>
+        <View style={styles.inner}>
+          <Image source={require('../../assets/Menu/CategoriaSobremesa.jpg')} style={styles.imgMenu} />
+          <Text style={styles.descriptionMenu}>Sobremesas</Text>
+          <Text style={styles.numberMenu}>(17)</Text>
+        </View>
+      </View>
+
+      <View style={styles.box}>
+        <View style={styles.inner}>
+          <Image source={require('../../assets/Menu/CategoriaBebidas.jpg')} style={styles.imgMenu} />
+          <Text style={styles.descriptionMenu}>Bebidas</Text>
+          <Text style={styles.numberMenu}>(21)</Text>
+        </View>
+      </View>
+
+      <View style={styles.box}>
+        <View style={styles.inner}>
+          <Image source={require('../../assets/Menu/CategoriaPorcoes.jpg')} style={styles.imgMenu} />
+          <Text style={styles.descriptionMenu}>Porções</Text>
+          <Text style={styles.numberMenu}>(14)</Text>
+        </View>
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -56,8 +56,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     shadowColor: "#000",
     shadowOffset: {
-	    width: 0,
-	    height: 1,
+      width: 0,
+      height: 1,
     },
     shadowOpacity: 0.20,
     shadowRadius: 1.41,
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  imgMenu:{
+  imgMenu: {
     width: '100%',
     height: '65%',
     position: 'absolute',
@@ -75,8 +75,8 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 8,
     top: 0,
     left: 0,
-  },  
-  descriptionMenu:{
+  },
+  descriptionMenu: {
     fontFamily: 'Inter_400Regular',
     position: 'absolute',
     top: 0,

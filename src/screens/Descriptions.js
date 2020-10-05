@@ -1,40 +1,40 @@
 import React, { Component } from 'react';
-import { View, Image, ScrollView, StyleSheet,Text, Button} from 'react-native';
+import { View, Image, ScrollView, StyleSheet, Text, Button } from 'react-native';
 import NumericInput from 'react-native-numeric-input'
 export default class Descriptions extends Component {
- render(){
-    return( 
-        <View style={styles.container}>
-            <View style={styles.img}>
-              <Image source={require('../../assets/Menu/ExecutivoCoxa.jpg')} style = {styles.ImageProducts} />
-            </View>
-            <View style={styles.descriptionProduct}>
-                <Text style={styles.titleProduct}>Executivo Coxa</Text>
-                <Text style={styles.valueMenu}>R$ 25,00</Text>
-                <Text style={styles.valueMenuValid}>R$ 20,00</Text>
-                <NumericInput
-                  totalWidth={100} 
-                  totalHeight={35} 
-                  iconSize={25}
-                  step={1}
-                  minValue={0}
-                  maxValue={25}
-                  valueType='real'
-                  rounded 
-                  textColor='#f5872b' 
-                  iconStyle={{ color: 'white' }} 
-                  rightButtonBackgroundColor='#f5872b' 
-                  leftButtonBackgroundColor='#f5872b'
-                />
-                <Text style={styles.descriptions}>Uma refeição completa, com Arroz, fritas, feijão, alface, cenoura, tomate, coxa de frango grelhada</Text>
-                <View style={styles.buttonBag}>
-                  <Button
-                    title = "Adicionar a Sacola"
-                    color = "#f5872b"
-                  />
-                </View>
-            </View>
-        </View> 
+  render() {
+    return (
+      <View style={styles.container}>
+        <View style={styles.img}>
+          <Image source={require('../../assets/Menu/ExecutivoCoxa.jpg')} style={styles.ImageProducts} />
+        </View>
+        <View style={styles.descriptionProduct}>
+          <Text style={styles.titleProduct}>Executivo Coxa</Text>
+          <Text style={styles.valueMenu}>R$ 25,00</Text>
+          <Text style={styles.valueMenuValid}>R$ 20,00</Text>
+          <NumericInput
+            totalWidth={100}
+            totalHeight={35}
+            iconSize={25}
+            step={1}
+            minValue={0}
+            maxValue={25}
+            valueType='real'
+            rounded
+            textColor='#f5872b'
+            iconStyle={{ color: 'white' }}
+            rightButtonBackgroundColor='#f5872b'
+            leftButtonBackgroundColor='#f5872b'
+          />
+          <Text style={styles.descriptions}>Uma refeição completa, com Arroz, fritas, feijão, alface, cenoura, tomate, coxa de frango grelhada</Text>
+          <View style={styles.buttonBag}>
+            <Button
+              title="Adicionar a Sacola"
+              color="#f5872b"
+            />
+          </View>
+        </View>
+      </View>
     );
   }
 }

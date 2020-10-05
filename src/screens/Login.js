@@ -30,7 +30,7 @@ export default function Login({ navigation }) {
           }
         })
       })
-      
+
       .catch(error => {
         if (error.code === 'auth/invalid-email') {
           alert('Esse endereço de e-mail é inválido!');

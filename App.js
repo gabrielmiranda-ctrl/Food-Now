@@ -1,22 +1,45 @@
-import * as React from 'react';
-import { View, StyleSheet,} from 'react-native';
-import Descriptions from './src/screens/Descriptions';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+// Importando as telas que serão puxadas.
+import Welcome from './src/screens/Welcome';
+import Login from './src/screens/Login';
+import RegisterUsers from './src/screens/RegisterUsers';
+import Home from './src/screens/Home';
+import UserArea from './src/screens/UserArea';
+
+const Stack = createStackNavigator();
 
 export default function App() {
-    return (
-            <View style={styles.container}>
-                <Descriptions/>
-            </View>
-    );
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Welcome">
+        <Stack.Screen
+          name="Welcome"
+          component={Welcome}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="RegisterUsers"
+          component={RegisterUsers}
+          options={{
+            title: "Cadastro",
+            headerTintColor: '#F5872B'
+          }}
+        />
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen
+          name="UserArea"
+          component={UserArea}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: '100%',
-    height: '100%',
-    padding: 5,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-});

@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, StatusBar} from 'react-native';
+import { Text, View, StyleSheet, StatusBar } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function Header() {
-  async function teste(){
+  async function teste() {
     alert("dasdadasdsa")
   }
-  return(
+  return (
     <View style={styles.header}>
       <Icon name={'chevron-left'} onPress={() => teste()} size={24} color="#555" />
       <Text style={styles.title}>Cardápio</Text>
