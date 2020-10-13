@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   KeyboardAvoidingView,
@@ -11,8 +11,7 @@ import {
 } from 'react-native';
 import firebase from '@react-native-firebase/app';
 import auth from '@react-native-firebase/auth';
-import Home from './Home';
-import UserArea from './UserArea';
+import database from '@react-native-firebase/database';
 
 export default function Login({ navigation }) {
 
@@ -23,13 +22,34 @@ export default function Login({ navigation }) {
     auth()
       .signInWithEmailAndPassword(email, password)
       .then(() => {
-        // Redirecionar usuário.
-        firebase.auth().onAuthStateChanged(user => {
-          if (user != null) {
-            navigation.navigate('UserArea')
-          }
-        })
+
+        // Pegando o UID do usuário que acabou de ser logado.
+        var user = firebase.auth().currentUser;
+        if (user != null) {
+          userId = user.uid;
+        }
+
+        // Pegando o nível de acesso do usuário logado no banco de dados.
+        database()
+          .ref('/users/' + userId + '/accessLevel')
+          .once('value')
+          .then(snapshot => {
+            var accessLevel = snapshot.val();
+            //console.log('AccessLevel: ', snapshot.val());
+
+            // Redirecionando usuário.
+            firebase.auth().onAuthStateChanged(user => {
+              if (user != null && accessLevel === 'admin') {
+                navigation.navigate('AdminArea')
+              }
+              if (user != null && accessLevel === 'client') {
+                navigation.navigate('ClientArea')
+              }
+            });
+
+          });
       })
+
 
       .catch(error => {
         if (error.code === 'auth/invalid-email') {
