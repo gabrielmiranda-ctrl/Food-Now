@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
+import firebase from '@react-native-firebase/app';
+import auth from '@react-native-firebase/auth';
 
 export default function AdminArea({ navigation }) {
   return (
@@ -7,7 +9,7 @@ export default function AdminArea({ navigation }) {
       <Text style={styles.text}>ÁREA DO ADMIN</Text>
       <Button
         title="Ir para perfil"
-        onPress={() => navigation.navigate('UserProfile')}
+        onPress={() => navigation.navigate('Profile')}
       />
     </View>
   );

@@ -3,25 +3,19 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 // Importando as telas que serão puxadas.
-import Welcome from './src/screens/Welcome';
 import Login from './src/screens/Login';
 import RegisterUsers from './src/screens/RegisterUsers';
 import Home from './src/screens/Home';
-import UserProfile from './src/screens/UserProfile';
+import Profile from './src/screens/Profile';
 import AdminArea from './src/screens/AdminArea';
-import ClientArea from './src/screens/ClientArea';
+import EditProfile from './src/screens/EditProfile';
 
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Welcome">
-        <Stack.Screen
-          name="Welcome"
-          component={Welcome}
-          options={{ headerShown: false }}
-        />
+      <Stack.Navigator initialRouteName="Login">
         <Stack.Screen
           name="Login"
           component={Login}
@@ -41,21 +35,24 @@ export default function App() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="UserProfile"
-          component={UserProfile}
+          name="Profile"
+          component={Profile}
           options={{
             title: "Perfil",
             headerTintColor: '#F5872B'
           }}
         />
         <Stack.Screen
-          name="AdminArea"
-          component={AdminArea}
-          options={{ headerShown: false }}
+          name="EditProfile"
+          component={EditProfile}
+          options={{
+            title: "Editar perfil",
+            headerTintColor: '#F5872B'
+          }}
         />
         <Stack.Screen
-          name="ClientArea"
-          component={ClientArea}
+          name="AdminArea"
+          component={AdminArea}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

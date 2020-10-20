@@ -26,30 +26,32 @@ export default function Login({ navigation }) {
         // Pegando o UID do usuário que acabou de ser logado.
         var user = firebase.auth().currentUser;
         if (user != null) {
-          userId = user.uid;
-        }
+          var userId = user.uid;
 
-        // Pegando o nível de acesso do usuário logado no banco de dados.
-        database()
-          .ref('/users/' + userId + '/accessLevel')
-          .once('value')
-          .then(snapshot => {
-            var accessLevel = snapshot.val();
-            //console.log('AccessLevel: ', snapshot.val());
+          // Pegando o nível de acesso do usuário logado no banco de dados.
+          database()
+            .ref('/users/' + userId + '/accessLevel')
+            .once('value')
+            .then(snapshot => {
+              var accessLevel = snapshot.val();
+              //console.log('AccessLevel: ', snapshot.val());
 
-            // Redirecionando usuário.
-            firebase.auth().onAuthStateChanged(user => {
-              if (user != null && accessLevel === 'admin') {
-                navigation.navigate('AdminArea')
-              }
-              if (user != null && accessLevel === 'client') {
-                navigation.navigate('ClientArea')
-              }
+              // Redirecionando usuário.
+              firebase.auth().onAuthStateChanged(user => {
+                if (user != null && accessLevel === 'admin') {
+                  navigation.navigate('AdminArea')
+                }
+                if (user != null && accessLevel === 'client') {
+                  navigation.navigate('Home')
+                }
+                if (user != null && accessLevel != 'client' && accessLevel != 'admin') {
+                  alert('Erro ao encontrar seu nível de acesso.');
+                }
+              });
+
             });
-
-          });
+        }
       })
-
 
       .catch(error => {
         if (error.code === 'auth/invalid-email') {
@@ -67,6 +69,11 @@ export default function Login({ navigation }) {
           console.log('Você efetuou muitas tentativas! Tente mais tarde.');
         }
 
+        if (error.code === 'auth/user-not-found') {
+          alert('Não há registro de usuário correspondente a este identificador.');
+          console.log('Não há registro de usuário correspondente a este identificador.');
+        }
+
         console.error(error);
       });
   }
@@ -76,7 +83,7 @@ export default function Login({ navigation }) {
       <StatusBar backgroundColor="#F5872B" />
       <View style={styles.containerLogo} >
         <Image style={styles.imageLogo}
-          source={require('../../assets/img_login/logo.png')}
+          source={require('../../assets/splash.png')}
         />
       </View>
 
@@ -126,21 +133,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#FFF'
   },
-  /*imageLogo: {
-    width: 250,
-    height: 230
-  },*/
+  imageLogo: {
+    width: 220,
+    height: 220,
+    flex: 1,
+  },
   containerLogo: {
     flex: 1,
     justifyContent: 'center',
-    paddingBottom: 35,
+    alignItems: 'center',
   },
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
     width: '90%',
-    paddingBottom: 50,
   },
   input: {
     backgroundColor: '#FFF',

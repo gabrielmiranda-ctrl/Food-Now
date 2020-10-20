@@ -1,205 +1,165 @@
-import React, { Component } from 'react';
-import { View, Image, ScrollView, StyleSheet, Text, Dimensions } from 'react-native';
-//import Bottom Navigation
-import { createAppContainer } from 'react-navigation';
-import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
+import React from 'react';
+import { View, Image, ScrollView, StyleSheet, Text, Dimensions, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 //Components
 import HeaderTitle from '../components/HeaderTitle';
-//telas
-import Profile from './Profile';
-import MenuOptions from './MenuOptions';
-import Bag from './Bag';
+
 //setando tamanho
 const { width } = Dimensions.get("window");
 const height = width * 0.6; //60%
 
-class Home extends Component {
-  render() {
-    return (
-      <View style={style.container}>
-        <ScrollView>
-          <View style={style.name}>
-            <Text style={style.nameUser}>
-              Olá, Sandro
-          </Text>
-            <Text style={style.questUser}>
-              O que você quer comer?
-          </Text>
-          </View>
-          <View style={style.contact}>
-            <View style={style.circle}>
-              <View style={style.inner}>
-                <View style={style.circleIcon}>
-                  <Icon name={'map-marker'} size={35} style={style.icon} />
-                </View>
-              </View>
-            </View>
+import database from '@react-native-firebase/database';
+import auth from '@react-native-firebase/auth';
+import firebase from '@react-native-firebase/app';
+import { FirebaseDatabaseTypes } from '@react-native-firebase/database';
 
-            <View style={style.circle}>
-              <View style={style.inner}>
-                <View style={style.circleIcon}>
-                  <Icon name={'envelope'} size={35} style={style.icon} />
-                </View>
-              </View>
-            </View>
+export default function Home({ navigation }) {
+  // Logout de usuário.
+  const logout = () => {
+    auth()
+      .signOut()
+      .then(() => navigation.navigate('Login'));
+  }
 
-            <View style={style.circle}>
-              <View style={style.inner}>
-                <View style={style.circleIcon}>
-                  <Icon name={'phone'} size={35} style={style.icon} />
-                </View>
-              </View>
-            </View>
-
-            <View style={style.circle}>
-              <View style={style.inner}>
-                <View style={style.circleIcon}>
-                  <Icon name={'comment'} size={35} style={style.icon} />
-                </View>
-              </View>
-            </View>
-          </View>
-
-          <View style={style.boxTitle}>
-            <HeaderTitle />
-          </View>
-
-          <View stytle={{ height: 130, marginTop: 20, paddingLeft: 15, paddingRight: 15 }}>
-            <ScrollView paginEnabled horizontal onScroll={this.change} showsHorizontalScrollIndicator={false} style={style.scroll}>
-
-              <View style={style.boxProducts}>
-                <View style={{ flex: 2 }}>
-                  <Image
-                    source={require('../../assets/Menu/ExecutivoCoxa.jpg')}
-                    style={style.ImageProducts}>
-                  </Image>
-                </View>
-                <View style={style.TextProducts}>
-                  <Text style={style.NameProducts}>Executivo Coxa</Text>
-                  <Text style={style.descriptionMenu}>Arroz, fritas, feijão, alface, cenoura, tomate, coxa de frango grelhada</Text>
-                  <Text style={style.valueMenu}>R$ 25,00</Text>
-                  <Text style={style.valueMenuValid}>R$ 20,00</Text>
-                </View>
-              </View>
-
-              <View style={style.boxProducts}>
-                <View style={{ flex: 2 }}>
-                  <Image
-                    source={require('../../assets/Menu/MousseMaracuja.jpg')}
-                    style={style.ImageProducts}>
-                  </Image>
-                </View>
-                <View style={style.TextProducts}>
-                  <Text style={style.NameProducts}>Mousse de Maracujá</Text>
-                  <Text style={style.descriptionMenu}>Mousse de Maracujá com cobertura de chocolate</Text>
-                  <Text style={style.valueMenu}>R$ 8,50</Text>
-                  <Text style={style.valueMenuValid}>R$ 5,50</Text>
-                </View>
-              </View>
-
-              <View style={style.boxProducts}>
-                <View style={{ flex: 2 }}>
-                  <Image
-                    source={require('../../assets/Menu/CaipirinhaMorango.jpg')}
-                    style={style.ImageProducts}>
-                  </Image>
-                </View>
-                <View style={style.TextProducts}>
-                  <Text style={style.NameProducts}>Caipirinha de Morango</Text>
-                  <Text style={style.descriptionMenu}>Caipinha de Morango de Vodka Orloff</Text>
-                  <Text style={style.valueMenu}>R$ 13,50</Text>
-                  <Text style={style.valueMenuValid}>R$ 10,50</Text>
-                </View>
-              </View>
-
-              <View style={style.boxProducts}>
-                <View style={{ flex: 2 }}>
-                  <Image
-                    source={require('../../assets/Menu/SaladaFrutas.jpg')}
-                    style={style.ImageProducts}>
-                  </Image>
-                </View>
-                <View style={style.TextProducts}>
-                  <Text style={style.NameProducts}>Salada de Frutas</Text>
-                  <Text style={style.descriptionMenu}>Morango, Laranja, Abacaxi, Manga, Kiwi, Amora</Text>
-                  <Text style={style.valueMenu}>R$ 18,50</Text>
-                  <Text style={style.valueMenuValid}>R$ 15,00</Text>
-                </View>
-              </View>
-
-            </ScrollView>
-          </View>
-        </ScrollView>
-      </View>
+  // Confirmação da opção sair.
+  const logoutAlert = () =>
+    Alert.alert(
+      "Sair",
+      "Você deseja realmente sair?",
+      [
+        {
+          text: "Cancelar",
+          style: "cancel"
+        },
+        {
+          text: "OK",
+          onPress: () => logout()
+        }
+      ],
+      { cancelable: false }
     );
-  }
+
+  return (
+    <View style={style.container}>
+      {/* <TabNavigator /> */}
+      <ScrollView>
+        <Icon name={'angle-left'} onPress={() => logoutAlert()} size={24} color="#555" />
+
+        <View style={style.name}>
+          <Text style={style.nameUser}>
+            Olá,
+          </Text>
+          <Text style={style.questUser}>
+            O que você quer comer?
+          </Text>
+        </View>
+        <View style={style.contact}>
+          <View style={style.circle}>
+            <View style={style.inner}>
+              <View style={style.circleIcon}>
+                <Icon name={'map-marker'} size={35} style={style.icon} />
+              </View>
+            </View>
+          </View>
+
+          <View style={style.circle}>
+            <View style={style.inner}>
+              <View style={style.circleIcon}>
+                <Icon name={'envelope'} size={35} style={style.icon} />
+              </View>
+            </View>
+          </View>
+
+          <View style={style.circle}>
+            <View style={style.inner}>
+              <View style={style.circleIcon}>
+                <Icon name={'phone'} size={35} style={style.icon} />
+              </View>
+            </View>
+          </View>
+
+          <View style={style.circle}>
+            <View style={style.inner}>
+              <View style={style.circleIcon}>
+                <Icon name={'comment'} size={35} style={style.icon} />
+              </View>
+            </View>
+          </View>
+        </View>
+
+        <View style={style.boxTitle}>
+          <HeaderTitle />
+        </View>
+
+        <View stytle={{ height: 130, marginTop: 20, paddingLeft: 15, paddingRight: 15 }}>
+          <ScrollView paginEnabled horizontal showsHorizontalScrollIndicator={false} style={style.scroll}>
+
+            <View style={style.boxProducts}>
+              <View style={{ flex: 2 }}>
+                <Image
+                  source={require('../../assets/Menu/ExecutivoCoxa.jpg')}
+                  style={style.ImageProducts}>
+                </Image>
+              </View>
+              <View style={style.TextProducts}>
+                <Text style={style.NameProducts}>Executivo Coxa</Text>
+                <Text style={style.descriptionMenu}>Arroz, fritas, feijão, alface, cenoura, tomate, coxa de frango grelhada</Text>
+                <Text style={style.valueMenu}>R$ 25,00</Text>
+                <Text style={style.valueMenuValid}>R$ 20,00</Text>
+              </View>
+            </View>
+
+            <View style={style.boxProducts}>
+              <View style={{ flex: 2 }}>
+                <Image
+                  source={require('../../assets/Menu/MousseMaracuja.jpg')}
+                  style={style.ImageProducts}>
+                </Image>
+              </View>
+              <View style={style.TextProducts}>
+                <Text style={style.NameProducts}>Mousse de Maracujá</Text>
+                <Text style={style.descriptionMenu}>Mousse de Maracujá com cobertura de chocolate</Text>
+                <Text style={style.valueMenu}>R$ 8,50</Text>
+                <Text style={style.valueMenuValid}>R$ 5,50</Text>
+              </View>
+            </View>
+
+            <View style={style.boxProducts}>
+              <View style={{ flex: 2 }}>
+                <Image
+                  source={require('../../assets/Menu/CaipirinhaMorango.jpg')}
+                  style={style.ImageProducts}>
+                </Image>
+              </View>
+              <View style={style.TextProducts}>
+                <Text style={style.NameProducts}>Caipirinha de Morango</Text>
+                <Text style={style.descriptionMenu}>Caipinha de Morango de Vodka Orloff</Text>
+                <Text style={style.valueMenu}>R$ 13,50</Text>
+                <Text style={style.valueMenuValid}>R$ 10,50</Text>
+              </View>
+            </View>
+
+            <View style={style.boxProducts}>
+              <View style={{ flex: 2 }}>
+                <Image
+                  source={require('../../assets/Menu/SaladaFrutas.jpg')}
+                  style={style.ImageProducts}>
+                </Image>
+              </View>
+              <View style={style.TextProducts}>
+                <Text style={style.NameProducts}>Salada de Frutas</Text>
+                <Text style={style.descriptionMenu}>Morango, Laranja, Abacaxi, Manga, Kiwi, Amora</Text>
+                <Text style={style.valueMenu}>R$ 18,50</Text>
+                <Text style={style.valueMenuValid}>R$ 15,00</Text>
+              </View>
+            </View>
+
+          </ScrollView>
+        </View>
+      </ScrollView>
+    </View>
+  );
 }
-
-//menu navigation
-const TabNavigator = createMaterialBottomTabNavigator(
-  {
-    Home: {
-      screen: Home,
-      navigationOptions: {
-        tabBarLabel: 'Home',
-        activeColor: '#fff',
-        inactiveColor: '#fff',
-        barStyle: { backgroundColor: '#f5872b' },
-        tabBarIcon: () => (
-          <View>
-            <Icon name={'home'} size={27} style={{ color: '#fff' }} />
-          </View>
-        )
-      }
-    },
-
-    MenuOptions: {
-      screen: MenuOptions,
-      navigationOptions: {
-        tabBarLabel: 'Menu',
-        activeColor: '#fff',
-        inactiveColor: '#000000',
-        barStyle: { backgroundColor: '#f5872b' },
-        tabBarIcon: () => (
-          <View>
-            <Icon name={'th-large'} size={27} style={{ color: '#fff' }} />
-          </View>
-        )
-      }
-    },
-
-    Bag: {
-      screen: Bag,
-      navigationOptions: {
-        tabBarLabel: 'Carrinho',
-        activeColor: '#fff',
-        inactiveColor: '#000000',
-        barStyle: { backgroundColor: '#f5872b' },
-        tabBarIcon: () => (
-          <View>
-            <Icon name={'shopping-cart'} size={27} style={{ color: '#fff' }} />
-          </View>
-        )
-      }
-    },
-
-    Profile: {
-      screen: Profile,
-      navigationOptions: {
-        tabBarLabel: 'Perfil',
-        activeColor: '#fff',
-        inactiveColor: '#000000',
-        barStyle: { backgroundColor: '#f5872b' },
-        tabBarIcon: () => (
-          <View>
-            <Icon name={'user'} size={27} style={{ color: '#fff' }} />
-          </View>
-        )
-      }
-    },
-  }
-);
 
 const style = StyleSheet.create({
   container: {
@@ -321,6 +281,3 @@ const style = StyleSheet.create({
     color: '#f5872b',
   }
 });
-
-export default createAppContainer(TabNavigator);
-

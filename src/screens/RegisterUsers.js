@@ -20,11 +20,11 @@ Icon.loadFont();
 export default function RegisterUsers({ navigation }) {
 
   // Constantes que guardam os dados colocados nos textInputs.
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [accessLevel, setAccessLevel] = useState('');
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [accessLevel, setAccessLevel] = useState("admin");
 
   // Função que insere os dados no banco.
   function registerUser(name, phone, email, password, accessLevel) {
@@ -36,21 +36,21 @@ export default function RegisterUsers({ navigation }) {
         // Pegar o UID do usuário cadastrado.
         var user = firebase.auth().currentUser;
         if (user != null) {
-          userId = user.uid;
-        }
+          var userId = user.uid;
 
-        // Inserindo os dados do usuário no Realtime Database do Firebase.
-        database()
-          .ref('users/' + userId)
-          .set({
-            name: name,
-            phone: phone,
-            email: email,
-            password: md5(password), // O md5 realiza a criptografia da senha.
-            accessLevel: accessLevel,
-          })
-        alert('Usuário cadastrado com sucesso!');
-        console.log('Usuário cadastrado com sucesso!');
+          // Inserindo os dados do usuário no Realtime Database do Firebase.
+          database()
+            .ref('users/' + userId)
+            .set({
+              name: name,
+              phone: phone,
+              email: email,
+              password: password, // md5(password) - O md5 realiza a criptografia da senha.
+              accessLevel: accessLevel,
+            })
+          alert('Usuário cadastrado com sucesso!');
+          console.log('Usuário cadastrado com sucesso!');
+        }
       })
       .catch(error => {
         if (error.code === 'auth/email-already-in-use') {
@@ -71,6 +71,7 @@ export default function RegisterUsers({ navigation }) {
         console.error(error);
       });
   }
+
 
   return (
     <View style={styles.container}>
@@ -154,7 +155,7 @@ export default function RegisterUsers({ navigation }) {
             style={styles.picker}
             onValueChange={(itemValue, itemIndex) => setAccessLevel(itemValue)}
           >
-            <Picker.Item label="Selecionar" value="" />
+            {/* <Picker.Item label="Selecionar" value="" /> */}
             <Picker.Item label="Administrador" value="admin" />
             <Picker.Item label="Cliente" value="client" />
           </Picker>
