@@ -13,6 +13,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import firebase from '@react-native-firebase/app';
 import database from '@react-native-firebase/database';
 import auth from '@react-native-firebase/auth';
+import storage from '@react-native-firebase/storage';
 import md5 from 'md5';
 
 Icon.loadFont();
@@ -28,59 +29,86 @@ export default function RegisterUsers({ navigation }) {
 
   // Função que insere os dados no banco.
   function registerUser(name, phone, email, password, accessLevel) {
+    // Verificar se os campos foram preenchidos.
+    if (name === '' || name === null && phone === '' || phone === null && email === '' || email === null && password === '' || password === null) {
+      alert('Todos os campos devem ser preenchidos.');
+    }
+    else if (name === '' || name === null) {
+      alert('O campo de nome tem que ser preenchido.');
+    }
+    else if (phone === '' || phone === null) {
+      alert('O campo de celular tem que ser preenchido.');
+    }
+    else if (email === '' || email === null) {
+      alert('O campo de e-mail tem que ser preenchido.');
+    }
+    else if (password === '' || password === null) {
+      alert('O campo de senha tem que ser preenchido.');
+    }
+    else {
+      // Criar usuário no Authentication do Firebase.
+      auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then(() => {
+          // Pegar o UID do usuário cadastrado.
+          var user = firebase.auth().currentUser;
+          if (user != null) {
+            var userId = user.uid;
 
-    // Criar usuário no Authentication do Firebase.
-    auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        // Pegar o UID do usuário cadastrado.
-        var user = firebase.auth().currentUser;
-        if (user != null) {
-          var userId = user.uid;
+            // Pegando a imagem de perfil de usuário padrão no Storage.
+            storage()
+              .ref('/profileImages/default_icon/user_icon.png')
+              .getDownloadURL()
+              .then(downloadUrl => {
 
-          // Inserindo os dados do usuário no Realtime Database do Firebase.
-          database()
-            .ref('users/' + userId)
-            .set({
-              name: name,
-              phone: phone,
-              email: email,
-              password: password, // md5(password) - O md5 realiza a criptografia da senha.
-              accessLevel: accessLevel,
-            })
-          alert('Usuário cadastrado com sucesso!');
-          console.log('Usuário cadastrado com sucesso!');
-        }
-      })
-      .catch(error => {
-        if (error.code === 'auth/email-already-in-use') {
-          alert('Esse endereço de e-mail já está em uso!');
-          console.log('Esse endereço de e-mail já está em uso!');
-        }
+                // Inserindo os dados do usuário no Realtime Database do Firebase.
+                database()
+                  .ref('users/' + userId)
+                  .set({
+                    name: name,
+                    phone: phone,
+                    email: email,
+                    password: password, // md5(password) - O md5 realiza a criptografia da senha.
+                    accessLevel: accessLevel,
+                    photoUrl: downloadUrl,
+                  })
+              });
+            alert('Usuário cadastrado com sucesso!');
+            console.log('Usuário cadastrado com sucesso!');
+          }
+        })
+        .catch(error => {
+          if (error.code === 'auth/email-already-in-use') {
+            alert('Esse endereço de e-mail já está em uso!');
+            console.log('Esse endereço de e-mail já está em uso!');
+          }
 
-        if (error.code === 'auth/invalid-email') {
-          alert('Esse endereço de e-mail é inválido!');
-          console.log('Esse endereço de e-mail é inválido!');
-        }
+          else if (error.code === 'auth/invalid-email') {
+            alert('Esse endereço de e-mail é inválido!');
+            console.log('Esse endereço de e-mail é inválido!');
+          }
 
-        if (error.code === 'auth/weak-password') {
-          alert('A senha precisa ter pelo menos 6 caracteres.');
-          console.log('A senha precisa ter pelo menos 6 caracteres.');
-        }
+          else if (error.code === 'auth/weak-password') {
+            alert('A senha precisa ter pelo menos 6 caracteres.');
+            console.log('A senha precisa ter pelo menos 6 caracteres.');
+          }
 
-        console.error(error);
-      });
+          else {
+            alert('Ocorreu um erro. Tente novamente.');
+          }
+
+          console.error(error);
+        });
+
+    }
   }
-
 
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#F5872B" />
       {/* View que caracteriza o cabeçalho. */}
       <View style={styles.header}>
-        {/* Responsável por mostrar o ícone. */}
-        <Text style={styles.textHeader}>Cadastre-se!</Text>
-        <Text style={styles.subTextHeader}>Insira seus dados corretos nos campos abaixo.</Text>
+        <Text style={styles.textHeader}>Insira seus dados corretos nos campos abaixo.</Text>
       </View>
 
       <ScrollView>
@@ -182,15 +210,10 @@ const styles = StyleSheet.create({
   },
 
   textHeader: {
-    color: '#F5872B',
-    padding: '5%',
-    fontSize: 18,
-  },
-
-  subTextHeader: {
     color: '#5F6368',
     paddingLeft: '5%',
     paddingBottom: '5%',
+    paddingTop: '8%',
     fontSize: 15,
   },
 

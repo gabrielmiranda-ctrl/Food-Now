@@ -63,118 +63,150 @@ export default function EditProfile({ navigation }) {
   }
 
   function editName(newName) {
-    // Alterando o nome.
-    database()
-      .ref('/users/' + userId)
-      .update({
-        name: newName,
-      })
-      .then(() => {
-        console.log('Nome alterado com sucesso.');
-        alert('Nome alterado com sucesso.\n' + name + ' --> ' + newName);
-      });
+    // Verificar se o campo foi preenchido.
+    if (newName === '' || newName === null) {
+      alert('O campo nome deve ser preenchido.');
+    }
+    else {
+      // Alterando o nome.
+      database()
+        .ref('/users/' + userId)
+        .update({
+          name: newName,
+        })
+        .then(() => {
+          console.log('Nome alterado com sucesso.');
+          alert('Nome alterado com sucesso.\n' + name + ' --> ' + newName);
+        });
+    }
   }
 
   function editPhone(newPhone) {
-    // Alterando o número de celular.
-    database()
-      .ref('/users/' + userId)
-      .update({
-        phone: newPhone,
-      })
-      .then(() => {
-        console.log('Número de celular alterado com sucesso.');
-        alert('Número de celular alterado com sucesso.\n' + phone + ' --> ' + newPhone);
-      });
+    // Verificar se o campo foi preenchido.
+    if (newPhone === '' || newPhone === null) {
+      alert('O campo celular deve ser preenchido.');
+    }
+    else {
+      // Alterando o número de celular.
+      database()
+        .ref('/users/' + userId)
+        .update({
+          phone: newPhone,
+        })
+        .then(() => {
+          console.log('Número de celular alterado com sucesso.');
+          alert('Número de celular alterado com sucesso.\n' + phone + ' --> ' + newPhone);
+        });
+    }
   }
 
   function editEmail(newEmail) {
-    // Alterando o e-mail.
-    var user = firebase.auth().currentUser;
+    // Verificar se o campo foi preenchido.
+    if (newEmail === '' || newEmail === null) {
+      alert('O campo e-mail deve ser preenchido.');
+    }
+    else {
+      // Alterando o e-mail.
+      var user = firebase.auth().currentUser;
 
-    user.updateEmail(newEmail).then(function () {
-      // Logout de usuário.
-      const logout = () => {
-        auth()
-          .signOut()
-          .then(() => navigation.navigate('Login'));
-      }
+      user.updateEmail(newEmail).then(function () {
+        // Logout de usuário.
+        const logout = () => {
+          auth()
+            .signOut()
+            .then(() => navigation.navigate('Login'));
+        }
 
-      Alert.alert(
-        "Alteração",
-        "Seu e-mail foi alterado. Você precisa fazer o login novamente.",
-        [
-          {
-            text: "OK",
-            onPress: () => logout()
-          }
-        ],
-      );
+        Alert.alert(
+          "Alteração",
+          "Seu e-mail foi alterado. Você precisa fazer o login novamente.",
+          [
+            {
+              text: "OK",
+              onPress: () => logout()
+            }
+          ],
+        );
 
-      database()
-        .ref('/users/' + userId)
-        .update({
-          email: newEmail,
-        })
-        .then(() => {
-          console.log('E-mail alterado com sucesso.');
-        });
+        database()
+          .ref('/users/' + userId)
+          .update({
+            email: newEmail,
+          })
+          .then(() => {
+            console.log('E-mail alterado com sucesso.');
+          });
 
-    }).catch(function (error) {
-      if (error.code === 'auth/email-already-in-use') {
-        alert('Esse endereço de e-mail já está em uso!');
-        console.log('Esse endereço de e-mail já está em uso!');
-      }
+      }).catch(function (error) {
+        if (error.code === 'auth/email-already-in-use') {
+          alert('Esse endereço de e-mail já está em uso!');
+          console.log('Esse endereço de e-mail já está em uso!');
+        }
 
-      if (error.code === 'auth/invalid-email') {
-        alert('Esse endereço de e-mail é inválido!');
-        console.log('Esse endereço de e-mail é inválido!');
-      }
+        else if (error.code === 'auth/invalid-email') {
+          alert('Esse endereço de e-mail é inválido!');
+          console.log('Esse endereço de e-mail é inválido!');
+        }
 
-      console.error(error);
-    });
+        else {
+          alert('Ocorreu um erro! Tente novamente.');
+        }
+
+        console.error(error);
+      });
+    }
   }
 
   function editPassword(newPassword) {
-    // Alterando a senha.
-    var user = firebase.auth().currentUser;
+    // Verificar se o campo foi preenchido.
+    if (newPassword === '' || newPassword === null) {
+      alert('O campo senha deve ser preenchido.');
+    }
+    else {
+      // Alterando a senha.
+      var user = firebase.auth().currentUser;
 
-    user.updatePassword(newPassword).then(function () {
-      // Logout de usuário.
-      const logout = () => {
-        auth()
-          .signOut()
-          .then(() => navigation.navigate('Login'));
-      }
+      user.updatePassword(newPassword).then(function () {
+        // Logout de usuário.
+        const logout = () => {
+          auth()
+            .signOut()
+            .then(() => navigation.navigate('Login'));
+        }
 
-      Alert.alert(
-        "Alteração",
-        "Sua senha foi alterada. Você precisa fazer o login novamente.",
-        [
-          {
-            text: "OK",
-            onPress: () => logout()
-          }
-        ],
-      );
+        Alert.alert(
+          "Alteração",
+          "Sua senha foi alterada. Você precisa fazer o login novamente.",
+          [
+            {
+              text: "OK",
+              onPress: () => logout()
+            }
+          ],
+        );
 
-      database()
-        .ref('/users/' + userId)
-        .update({
-          password: newPassword,
-        })
-        .then(() => {
-          console.log('Senha alterada com sucesso.');
-        });
+        database()
+          .ref('/users/' + userId)
+          .update({
+            password: newPassword,
+          })
+          .then(() => {
+            console.log('Senha alterada com sucesso.');
+          });
 
-    }).catch(function (error) {
-      if (error.code === 'auth/weak-password') {
-        alert('A senha precisa ter pelo menos 6 caracteres.');
-        console.log('A senha precisa ter pelo menos 6 caracteres.');
-      }
+      }).catch(function (error) {
+        if (error.code === 'auth/weak-password') {
+          alert('A senha precisa ter pelo menos 6 caracteres.');
+          console.log('A senha precisa ter pelo menos 6 caracteres.');
+        }
 
-      console.log(error);
-    });
+        else {
+          alert('Ocorreu um erro! Tente novamente.');
+        }
+
+        console.log(error);
+      });
+    }
   }
 
   return (
@@ -277,18 +309,6 @@ export default function EditProfile({ navigation }) {
           </View>
         </View>
 
-        {/* <View style={styles.btn}>
-          <TouchableOpacity
-            style={styles.btnSave}
-            onPress={() => { editProfile(newName, newPhone, newEmail, newPassword) }}
-          >
-            <View style={styles.row}>
-              <Text style={styles.textBtn}>Salvar alterações</Text>
-              <Icon name="edit" size={22} color="#FFF" />
-            </View>
-          </TouchableOpacity>
-        </View> */}
-
       </ScrollView>
     </View >
   );
@@ -322,6 +342,7 @@ const styles = StyleSheet.create({
   textInput: {
     backgroundColor: '#FFF',
     width: '60%',
+    height: 50,
     marginBottom: 15,
     color: '#222',
     fontSize: 17,
@@ -349,17 +370,5 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
   },
-
-  // textBtn: {
-  //   paddingRight: 10,
-  //   fontSize: 16,
-  //   color: '#FFF',
-  // },
-
-  // btn: {
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  // },
-
 
 })

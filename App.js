@@ -9,6 +9,8 @@ import Home from './src/screens/Home';
 import Profile from './src/screens/Profile';
 import AdminArea from './src/screens/AdminArea';
 import EditProfile from './src/screens/EditProfile';
+import EditPhoto from './src/screens/EditPhoto';
+import ForgotPassword from './src/screens/ForgotPassword';
 
 const Stack = createStackNavigator();
 
@@ -37,16 +39,33 @@ export default function App() {
         <Stack.Screen
           name="Profile"
           component={Profile}
-          options={{
-            title: "Perfil",
-            headerTintColor: '#F5872B'
-          }}
+          // options={{
+          //   title: "Perfil",
+          //   headerTintColor: '#F5872B'
+          // }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="EditProfile"
           component={EditProfile}
           options={{
             title: "Editar perfil",
+            headerTintColor: '#F5872B'
+          }}
+        />
+        <Stack.Screen
+          name="EditPhoto"
+          component={EditPhoto}
+          options={{
+            title: "Editar foto",
+            headerTintColor: '#F5872B'
+          }}
+        />
+        <Stack.Screen
+          name="ForgotPassword"
+          component={ForgotPassword}
+          options={{
+            title: "Redefinir senha",
             headerTintColor: '#F5872B'
           }}
         />
