@@ -11,6 +11,10 @@ import AdminArea from './src/screens/AdminArea';
 import EditProfile from './src/screens/EditProfile';
 import EditPhoto from './src/screens/EditPhoto';
 import ForgotPassword from './src/screens/ForgotPassword';
+import PaymentOptions from './src/screens/PaymentOptions';
+import RegisterCard from './src/screens/RegisterCard';
+import DeliveryAddress from './src/screens/DeliveryAddress';
+import ScanCode from './src/screens/ScanCode';
 
 const Stack = createStackNavigator();
 
@@ -72,6 +76,26 @@ export default function App() {
         <Stack.Screen
           name="AdminArea"
           component={AdminArea}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="PaymentOptions"
+          component={PaymentOptions}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="RegisterCard"
+          component={RegisterCard}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="DeliveryAddress"
+          component={DeliveryAddress}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ScanCode"
+          component={ScanCode}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

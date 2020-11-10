@@ -101,7 +101,7 @@ export default function EditPhoto() {
 
     Alert.alert(
       'Sucesso!',
-      'Sua foto de perfil foi atualizada. Refaça o login para carregá-la.'
+      'Sua foto de perfil foi atualizada.'
     );
 
     setImage(null);

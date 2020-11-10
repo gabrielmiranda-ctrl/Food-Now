@@ -7,10 +7,21 @@ export default function AdminArea({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>ÁREA DO ADMIN</Text>
-      <Button
-        title="Ir para perfil"
-        onPress={() => navigation.navigate('Profile')}
-      />
+
+      <View style={styles.btn}>
+        <Button
+          title="Ir para perfil"
+          onPress={() => navigation.navigate('Profile')}
+        />
+      </View>
+
+      <View style={styles.btn}>
+        <Button
+          title="Ir para tela de pagamento"
+          onPress={() => navigation.navigate('DeliveryAddress')}
+        />
+      </View>
+
     </View>
   );
 }
@@ -23,5 +34,8 @@ const styles = StyleSheet.create({
   },
   text: {
     paddingBottom: 50,
+  },
+  btn: {
+    marginBottom: 20,
   }
 })
