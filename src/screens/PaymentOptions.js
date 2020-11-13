@@ -1,8 +1,29 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, PermissionsAndroid } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 export default function PaymentOptions({ navigation }) {
+
+  // Solicitar permissão de uso de câmera.
+  const requestCameraPermission = async () => {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.CAMERA,
+      {
+        title: "Permissão",
+        message: "O aplicativo precisa que você dê a permissão para uso da câmera.",
+        buttonNeutral: "Pergunte-me depois",
+        buttonNegative: "Cancelar",
+        buttonPositive: "OK"
+      }
+    );
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      navigation.navigate('ScanCode')
+    }
+    else {
+      alert('Permissão de câmera negada.');
+    }
+  };
+
   return (
     <View style={styles.container}>
 
@@ -43,7 +64,7 @@ export default function PaymentOptions({ navigation }) {
             style={styles.image}
           />
           <TouchableOpacity
-            onPress={() => { navigation.navigate('ScanCode') }}
+            onPress={requestCameraPermission}
             style={styles.btn}
           >
             <Text style={styles.textBtn}>Selecionar</Text>

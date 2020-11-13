@@ -15,6 +15,7 @@ import PaymentOptions from './src/screens/PaymentOptions';
 import RegisterCard from './src/screens/RegisterCard';
 import DeliveryAddress from './src/screens/DeliveryAddress';
 import ScanCode from './src/screens/ScanCode';
+import PaymentFinished from './src/screens/PaymentFinished';
 
 const Stack = createStackNavigator();
 
@@ -96,6 +97,11 @@ export default function App() {
         <Stack.Screen
           name="ScanCode"
           component={ScanCode}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="PaymentFinished"
+          component={PaymentFinished}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
